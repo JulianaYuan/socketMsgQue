@@ -1,0 +1,16 @@
+exe=./libskmsgque.so
+
+$(exe):msgsocket.o remsg.o remsgque.o
+	g++ -o $(exe) -L../lib -lunp -I../ -I../include -I./ -lstdc++ -fPIC msgsocket.o remsg.o remsgque.o
+
+msgsocket.o:msgsocket.c
+	g++ -lstdc++ -c msgsocket.c -L../lib -lunp -I../ -I../include -fPIC
+
+remsg.o:remsg.c
+	g++ -lstdc++ -c remsg.c -lpthread -fPIC
+
+remsgque.o:remsgque.c
+	g++ -lstdc++ -c remsgque.c -fPIC
+
+clean:
+	rm *.o *.out *.so *.bak

@@ -1,0 +1,41 @@
+#######################
+# Makefile
+#######################
+
+# compile and lib parameter
+CC      := g++
+LIBS    := -L../lib -lunp
+LDFLAGS :=
+DEFINES :=
+INCLUDE := -I. -I../include -I../
+CFLAGS  :=
+CXXFLAGS:= 
+
+
+# link parameter
+LIB := libskmsgque.a
+
+#link
+$(LIB):msgsocket.o remsgque.o remsg.o
+	$(CC) -shared -o -fPIC ${LIBS} -o $@ $^
+
+#$(LIB):remsgque.o
+#	$(CC) -shared -o -fPIC -o $@ $^
+
+
+#$(LIB):remsg.o
+#	$(CC) -shared -o -fPIC -o $@ $^
+
+#compile
+msgsocket.o:msgsocket.c
+	$(CC) -c -shared -fPIC $^ -o $@ 
+
+remsgque.o:remsgque.c
+	$(CC) -c -shared -fPIC $^ -o $@ 
+
+remsg.o:remsg.c
+	$(CC) -c -shared -fPIC $^ -o $@ 
+
+# clean
+clean:
+	rm -fr *.o
